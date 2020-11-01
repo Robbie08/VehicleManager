@@ -8,6 +8,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 /**
  * OnClickListenerAddVehicle instance
@@ -19,9 +22,13 @@ import androidx.appcompat.app.AlertDialog;
  * First display a form for the user to fill out. This form will prompt
  * the user for the Make, Model, Year, and Id of the Vehicle.
  */
+
+
 public class OnClickListenerAddVehicle implements View.OnClickListener {
     @Override
     public void onClick(View view) {
+
+
         Context context = view.getRootView().getContext();
 
         // make our layouts accessible to our codebase
