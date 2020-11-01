@@ -11,4 +11,4 @@ This Android Application incorporates CRUD functionallity on a Vehicle Managemen
 via the command line interface. 
 
 * If the project does not run on Android studio please ensure that your machine is running a recent version of Android Studio; if 
-you need to download a new version, you can find one [Here](https://developer.android.com/studio)
+you need to download a new version, you can find one [here](https://developer.android.com/studio).
