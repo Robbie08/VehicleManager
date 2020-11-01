@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "515239315398",
+    "firebase_url": "https://vehicle-manager-3c660.firebaseio.com",
+    "project_id": "vehicle-manager-3c660",
+    "storage_bucket": "vehicle-manager-3c660.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:515239315398:android:5ab66ed459a1ff341654c7",
+        "android_client_info": {
+          "package_name": "com.ortiz.vehiclemanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "515239315398-0312milm3agjdqudsuk3vs2odbj3glgs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIc4NLHVQfO7qQA5CfpJbGZd-V6g-ZfHQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "515239315398-0312milm3agjdqudsuk3vs2odbj3glgs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
