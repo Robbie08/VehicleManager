@@ -8,10 +8,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-
 /**
  * OnClickListenerAddVehicle instance
  * Roberto Ortiz
@@ -50,21 +46,21 @@ public class OnClickListenerAddVehicle implements View.OnClickListener {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
+                                String sVehicleMake = "", sVehicleModel = "", sVehicleYear ="", sVehicleId = "";
+                                int iVehicleYear = 0, iVehicleId = 0;
+
                                 // Once the user has typed in their information we must collect it
-                                String sVehicleMake = editTextVehicleMake.getText().toString().trim();
-                                String sVehicleModel = editTextVehicleModel.getText().toString().trim();
-                                String sVehicleYear = editTextVehicleYear.getText().toString().trim();
-                                String sVehicleId = editTextVehicleId.getText().toString().trim();
+                                sVehicleMake = editTextVehicleMake.getText().toString().trim();
+                                sVehicleModel = editTextVehicleModel.getText().toString().trim();
+                                sVehicleYear = editTextVehicleYear.getText().toString().trim();
+                                sVehicleId = editTextVehicleId.getText().toString().trim();
+
 
                                 // we need to covert year and id to int so that we can create our Vehicle object
-                                int iVehicleYear = Integer.parseInt(sVehicleYear);
-                                int iVehicleId = Integer.parseInt(sVehicleId);
+                                iVehicleYear = Integer.parseInt(sVehicleYear);
+                                iVehicleId = Integer.parseInt(sVehicleId);
 
                                 Vehicle vehicle = new Vehicle(iVehicleId,iVehicleYear,sVehicleMake,sVehicleModel);
-
-                                /**
-                                 * In here we will send this information to firebase
-                                 */
 
                                 // if successful then we will display a toast, else display failure
                                 Toast.makeText(context, "Vehicle Added Sucessfully",Toast.LENGTH_LONG).show();
