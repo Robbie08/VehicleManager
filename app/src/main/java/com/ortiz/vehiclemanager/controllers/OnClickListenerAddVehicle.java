@@ -79,7 +79,7 @@ public class OnClickListenerAddVehicle implements View.OnClickListener {
                                     oVehicleReference.child(sVehicleId).child("Id").setValue(iVehicleId);
 
                                     // if successful then we will display a toast, else display failure
-                                    Toast.makeText(context, "Vehicle Added Sucessfully",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context, "Vehicle Added Successfully",Toast.LENGTH_LONG).show();
                                 }
                                 else{
                                     // if successful then we will display a toast, else display failure

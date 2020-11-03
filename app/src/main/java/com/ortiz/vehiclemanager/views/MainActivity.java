@@ -10,6 +10,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ortiz.vehiclemanager.controllers.OnClickListenerAddVehicle;
 import com.ortiz.vehiclemanager.R;
+import com.ortiz.vehiclemanager.controllers.OnClickListenerDeleteVehicle;
+import com.ortiz.vehiclemanager.controllers.OnClickListenerEditVehicle;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +30,12 @@ public class MainActivity extends AppCompatActivity {
         // create button on click
         Button buttonAddVehicle = (Button) findViewById(R.id.buttonAddVehicle);
         buttonAddVehicle.setOnClickListener(new OnClickListenerAddVehicle());
+
+        Button buttonEditVehicle = (Button) findViewById(R.id.buttonEditVehicle);
+        buttonEditVehicle.setOnClickListener(new OnClickListenerEditVehicle());
+
+        Button buttonDeleteVehicle = (Button) findViewById(R.id.buttonDeleteVehicle);
+        buttonDeleteVehicle.setOnClickListener(new OnClickListenerDeleteVehicle());
 
     }
 }
