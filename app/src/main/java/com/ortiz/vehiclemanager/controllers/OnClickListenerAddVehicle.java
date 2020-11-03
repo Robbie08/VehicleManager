@@ -1,4 +1,4 @@
-package com.ortiz.vehiclemanager;
+package com.ortiz.vehiclemanager.controllers;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
@@ -7,6 +7,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.ortiz.vehiclemanager.R;
+import com.ortiz.vehiclemanager.models.Vehicle;
+
 
 /**
  * OnClickListenerAddVehicle instance
@@ -56,14 +62,29 @@ public class OnClickListenerAddVehicle implements View.OnClickListener {
                                 sVehicleId = editTextVehicleId.getText().toString().trim();
 
 
-                                // we need to covert year and id to int so that we can create our Vehicle object
-                                iVehicleYear = Integer.parseInt(sVehicleYear);
-                                iVehicleId = Integer.parseInt(sVehicleId);
+
 
                                 Vehicle vehicle = new Vehicle(iVehicleId,iVehicleYear,sVehicleMake,sVehicleModel);
+                                DatabaseReference oVehicleReference = FirebaseDatabase.getInstance().getReference().child("Vehicles");
+                                boolean stringsIsEmpty = sVehicleId.isEmpty() || sVehicleYear.isEmpty() || sVehicleMake.isEmpty() || sVehicleModel.isEmpty();
+                                boolean stringsIsZero = sVehicleMake.length() == 0 || sVehicleModel.length() == 0 || sVehicleYear.length() == 0 || sVehicleId.length() == 0;
+                                if(!stringsIsEmpty && !stringsIsZero){
+                                    // we need to covert year and id to int so that we can create our Vehicle object
+                                    iVehicleYear = Integer.parseInt(sVehicleYear);
+                                    iVehicleId = Integer.parseInt(sVehicleId);
 
-                                // if successful then we will display a toast, else display failure
-                                Toast.makeText(context, "Vehicle Added Sucessfully",Toast.LENGTH_LONG).show();
+                                    oVehicleReference.child(sVehicleId).child("Make").setValue(sVehicleMake);
+                                    oVehicleReference.child(sVehicleId).child("Model").setValue(sVehicleModel);
+                                    oVehicleReference.child(sVehicleId).child("Year").setValue(iVehicleYear);
+                                    oVehicleReference.child(sVehicleId).child("Id").setValue(iVehicleId);
+
+                                    // if successful then we will display a toast, else display failure
+                                    Toast.makeText(context, "Vehicle Added Sucessfully",Toast.LENGTH_LONG).show();
+                                }
+                                else{
+                                    // if successful then we will display a toast, else display failure
+                                    Toast.makeText(context, "Error: Vehicle was not added",Toast.LENGTH_LONG).show();
+                                }
 
                                 dialog.cancel();
                             }

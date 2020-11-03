@@ -1,4 +1,4 @@
-package com.ortiz.vehiclemanager;
+package com.ortiz.vehiclemanager.models;
 
 /**
  * Vehicle Class

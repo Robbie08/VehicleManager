@@ -1,5 +1,7 @@
 package com.ortiz.vehiclemanager;
 
+import com.ortiz.vehiclemanager.models.Vehicle;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
