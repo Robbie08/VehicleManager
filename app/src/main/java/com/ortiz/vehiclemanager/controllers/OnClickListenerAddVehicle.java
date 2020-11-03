@@ -62,21 +62,20 @@ public class OnClickListenerAddVehicle implements View.OnClickListener {
                                 sVehicleId = editTextVehicleId.getText().toString().trim();
 
 
-
-
-                                Vehicle vehicle = new Vehicle(iVehicleId,iVehicleYear,sVehicleMake,sVehicleModel);
                                 DatabaseReference oVehicleReference = FirebaseDatabase.getInstance().getReference().child("Vehicles");
                                 boolean stringsIsEmpty = sVehicleId.isEmpty() || sVehicleYear.isEmpty() || sVehicleMake.isEmpty() || sVehicleModel.isEmpty();
                                 boolean stringsIsZero = sVehicleMake.length() == 0 || sVehicleModel.length() == 0 || sVehicleYear.length() == 0 || sVehicleId.length() == 0;
+
                                 if(!stringsIsEmpty && !stringsIsZero){
                                     // we need to covert year and id to int so that we can create our Vehicle object
                                     iVehicleYear = Integer.parseInt(sVehicleYear);
                                     iVehicleId = Integer.parseInt(sVehicleId);
+                                    Vehicle vehicle = new Vehicle(iVehicleId,iVehicleYear,sVehicleMake,sVehicleModel);
 
-                                    oVehicleReference.child(sVehicleId).child("Make").setValue(sVehicleMake);
-                                    oVehicleReference.child(sVehicleId).child("Model").setValue(sVehicleModel);
-                                    oVehicleReference.child(sVehicleId).child("Year").setValue(iVehicleYear);
-                                    oVehicleReference.child(sVehicleId).child("Id").setValue(iVehicleId);
+                                    oVehicleReference.child(Integer.toString(vehicle.getId())).child("Make").setValue(vehicle.getMake());
+                                    oVehicleReference.child(Integer.toString(vehicle.getId())).child("Model").setValue(vehicle.getModel());
+                                    oVehicleReference.child(Integer.toString(vehicle.getId())).child("Year").setValue(vehicle.getYear());
+                                    oVehicleReference.child(Integer.toString(vehicle.getId())).child("Id").setValue(vehicle.getId());
 
                                     // if successful then we will display a toast, else display failure
                                     Toast.makeText(context, "Vehicle Added Successfully",Toast.LENGTH_LONG).show();
