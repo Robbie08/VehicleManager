@@ -25,4 +25,11 @@ public class FirebaseDatabaseManager {
     public void deleteVehicleById(String sVehicleId) {
         oVehicleReference.child(sVehicleId).removeValue();
     }
+
+    public void addVehicle() {
+        oVehicleReference.child(sVehicleId).child("Make").setValue(vehicle.getMake());
+        oVehicleReference.child(sVehicleId).child("Model").setValue(vehicle.getModel());
+        oVehicleReference.child(sVehicleId).child("Year").setValue(vehicle.getYear());
+        oVehicleReference.child(sVehicleId).child("Id").setValue(vehicle.getId());
+    }
 }

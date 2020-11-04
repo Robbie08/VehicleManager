@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ortiz.vehiclemanager.R;
+import com.ortiz.vehiclemanager.models.FirebaseDatabaseManager;
 import com.ortiz.vehiclemanager.models.Vehicle;
 
 
@@ -58,9 +59,6 @@ public class OnClickListenerAddVehicle implements View.OnClickListener {
             sVehicleYear = editTextVehicleYear.getText().toString().trim();
             sVehicleId = editTextVehicleId.getText().toString().trim();
 
-
-            DatabaseReference oVehicleReference = FirebaseDatabase.getInstance().getReference().child("Vehicles");
-
             // handle empty input validation before we send any data to the Database
             if(sVehicleId.length() == 0 || sVehicleId == null){
                 editTextVehicleId.setError("Text can't be empty");
@@ -81,10 +79,8 @@ public class OnClickListenerAddVehicle implements View.OnClickListener {
                 iVehicleId = Integer.parseInt(sVehicleId);
                 Vehicle vehicle = new Vehicle(iVehicleId,iVehicleYear,sVehicleMake,sVehicleModel);
 
-                oVehicleReference.child(Integer.toString(vehicle.getId())).child("Make").setValue(vehicle.getMake());
-                oVehicleReference.child(Integer.toString(vehicle.getId())).child("Model").setValue(vehicle.getModel());
-                oVehicleReference.child(Integer.toString(vehicle.getId())).child("Year").setValue(vehicle.getYear());
-                oVehicleReference.child(Integer.toString(vehicle.getId())).child("Id").setValue(vehicle.getId());
+                FirebaseDatabaseManager firebaseDatabaseManager = new FirebaseDatabaseManager(vehicle);
+                firebaseDatabaseManager.addVehicle();
 
                 dialog.cancel();
                 Toast.makeText(context, "Vehicle Added Successfully",Toast.LENGTH_LONG).show();
