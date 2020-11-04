@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ortiz.vehiclemanager.R;
+import com.ortiz.vehiclemanager.models.FirebaseDatabaseManager;
 import com.ortiz.vehiclemanager.models.Vehicle;
 
 /**
@@ -44,7 +45,7 @@ public class OnClickListenerEditVehicleForm implements View.OnClickListener {
         EditText editTextVehicleModelEdit = (EditText) formElementView.findViewById(R.id.editTextVehicleEditModel);
         EditText editTextVehicleMakeEdit = (EditText) formElementView.findViewById(R.id.editTextVehicleEditMake);
 
-        DatabaseReference oVehicleReference = FirebaseDatabase.getInstance().getReference().child("Vehicles").child(sVehicleId);
+
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(formElementView);
@@ -76,9 +77,11 @@ public class OnClickListenerEditVehicleForm implements View.OnClickListener {
                     && sVehicleModel.length() != 0 && sVehicleYear.length() != 0) {
                 iVehicleYear = Integer.parseInt(sVehicleYear);
                 Vehicle vehicle = new Vehicle(iVehicleId, iVehicleYear, sVehicleMake, sVehicleModel);
-                oVehicleReference.child("Make").setValue(vehicle.getMake());
-                oVehicleReference.child("Model").setValue(vehicle.getModel());
-                oVehicleReference.child("Year").setValue(vehicle.getYear());
+
+                // Call the database manager
+                FirebaseDatabaseManager firebaseDatabaseManager = new FirebaseDatabaseManager(vehicle);
+                firebaseDatabaseManager.editVehicle();
+
                 Toast.makeText(context, "Vehicle Information Updated",Toast.LENGTH_LONG).show();
                 dialog.cancel();
             }
