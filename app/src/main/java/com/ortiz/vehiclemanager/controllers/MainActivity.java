@@ -1,4 +1,4 @@
-package com.ortiz.vehiclemanager.views;
+package com.ortiz.vehiclemanager.controllers;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;

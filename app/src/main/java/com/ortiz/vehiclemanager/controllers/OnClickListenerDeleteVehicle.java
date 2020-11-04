@@ -39,35 +39,27 @@ public class OnClickListenerDeleteVehicle implements View.OnClickListener {
         builder.setView(formElementsView);
         builder.setTitle("Delete Vehicle By ID");
         builder.setPositiveButton("Delete",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // I learned that leaving this empty is needed for some of the older version of Android Studio
-                            }
-                        });
+                (dialog, which) -> {
+                    // I learned that leaving this empty is needed for some of the older version of Android Studio
+                });
 
         AlertDialog dialog = builder.create();
         dialog.show();
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                // create a reference to the DB where our vehicles are stored
-                DatabaseReference oVehicleReference = FirebaseDatabase.getInstance().getReference().child("Vehicles");
-                String sVehicleId = editTextVehicleId.getText().toString().trim();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
+            // create a reference to the DB where our vehicles are stored
+            DatabaseReference oVehicleReference = FirebaseDatabase.getInstance().getReference().child("Vehicles");
+            String sVehicleId = editTextVehicleId.getText().toString().trim();
 
-                // This will handle the input validation, to make sure the user will not give any null or empty values
-                if(sVehicleId.length() != 0 && !sVehicleId.isEmpty() && sVehicleId != null ){
-                    oVehicleReference.child(sVehicleId).removeValue();
-                    dialog.cancel();
-                    Toast.makeText(context, "Vehicle Deleted Successfully",Toast.LENGTH_LONG).show();
-                }
-                else {
-                    editTextVehicleId.setError("Text Can't be empty");
-                }
-
+            // This will handle the input validation, to make sure the user will not give any null or empty values
+            if(sVehicleId.length() != 0 && !sVehicleId.isEmpty() && sVehicleId != null ){
+                oVehicleReference.child(sVehicleId).removeValue();
+                dialog.cancel();
+                Toast.makeText(context, "Vehicle Deleted Successfully",Toast.LENGTH_LONG).show();
             }
+            else {
+                editTextVehicleId.setError("Text Can't be empty");
+            }
+
         });
 
 

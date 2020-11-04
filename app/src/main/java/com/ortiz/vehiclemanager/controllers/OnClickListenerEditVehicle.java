@@ -34,28 +34,22 @@ public class OnClickListenerEditVehicle implements View.OnClickListener {
         builder.setView(formElementView);
         builder.setTitle("Edit Vehicle by Id");
         builder.setPositiveButton("Edit",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // learned that some older versions of android studio need this empty onClick event to not crash
-                    }
+                (dialog, which) -> {
+                    // learned that some older versions of android studio need this empty onClick event to not crash
                 });
 
 
         AlertDialog dialog = builder.create();
         dialog.show();
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String sVehicleId = editTextVehicleId.getText().toString().trim();
-                // This will handle the input validation, to make sure the user will not give any null or empty values
-                if (sVehicleId.length() != 0 && !sVehicleId.isEmpty() && sVehicleId != null) {
-                    // Call another instance of an alert dialog where the user can update the vehicle information
-                    new OnClickListenerEditVehicleForm(formElementView, sVehicleId);
-                    dialog.cancel();
-                } else {
-                    editTextVehicleId.setError("Text Can't be empty");
-                }
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
+            String sVehicleId = editTextVehicleId.getText().toString().trim();
+            // This will handle the input validation, to make sure the user will not give any null or empty values
+            if (sVehicleId.length() != 0 && !sVehicleId.isEmpty() && sVehicleId != null) {
+                // Call another instance of an alert dialog where the user can update the vehicle information
+                new OnClickListenerEditVehicleForm(formElementView, sVehicleId);
+                dialog.cancel();
+            } else {
+                editTextVehicleId.setError("Text Can't be empty");
             }
         });
     }
