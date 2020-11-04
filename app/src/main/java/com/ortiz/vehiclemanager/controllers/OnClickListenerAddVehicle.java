@@ -78,7 +78,6 @@ public class OnClickListenerAddVehicle implements View.OnClickListener {
                                     // if successful then we will display a toast, else display failure
                                     Toast.makeText(context, "Error: Vehicle was not added",Toast.LENGTH_LONG).show();
                                 }
-
                                 dialog.cancel();
                             }
                         }).show();

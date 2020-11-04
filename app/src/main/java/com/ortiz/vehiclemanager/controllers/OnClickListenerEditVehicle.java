@@ -37,12 +37,11 @@ public class OnClickListenerEditVehicle implements View.OnClickListener {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
-                        dialog.cancel();
+                        // learned that some older versions of android studio need this empty onClick event to not crash
                     }
                 });
 
-        // this will allow us to override the instance above and treat the alert dialog as the current view
+
         AlertDialog dialog = builder.create();
         dialog.show();
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
@@ -59,8 +58,6 @@ public class OnClickListenerEditVehicle implements View.OnClickListener {
                 }
             }
         });
-
-
     }
 }
 

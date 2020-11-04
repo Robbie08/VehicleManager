@@ -6,7 +6,7 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -25,7 +25,7 @@ public class OnClickListenerEditVehicleForm implements View.OnClickListener {
 
     View viewItem;
     Context context;
-    String sVehicleId = "", sVehicleModel="", sVehicleMake="", sVehicleYear="";
+    String sVehicleId , sVehicleModel="", sVehicleMake="", sVehicleYear="";
     int iVehicleId = 0, iVehicleYear =0;
     public OnClickListenerEditVehicleForm(View viewById, String sVehicleId) {
         this.viewItem = viewById;
@@ -46,30 +46,48 @@ public class OnClickListenerEditVehicleForm implements View.OnClickListener {
 
         DatabaseReference oVehicleReference = FirebaseDatabase.getInstance().getReference().child("Vehicles").child(sVehicleId);
 
-        new AlertDialog.Builder(context)
-                .setView(formElementView)
-                .setTitle("Edit Vehicle: "+sVehicleId)
-                .setPositiveButton("Edit",
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setView(formElementView);
+        builder.setTitle("Edit Vehicle: "+sVehicleId);
+        builder.setPositiveButton("Save",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                // extract and convert data from the edit text fields
-                                sVehicleModel = editTextVehicleModelEdit.getText().toString().trim();
-                                sVehicleMake = editTextVehicleMakeEdit.getText().toString().trim();
-                                sVehicleYear = editTextVehicleYearEdit.getText().toString().trim();
-                                iVehicleId = Integer.parseInt(sVehicleId);
-
-                                if(sVehicleYear.length() != 0 || !sVehicleYear.isEmpty()){
-                                    iVehicleYear = Integer.parseInt(sVehicleYear);
-                                }
-
-                                Vehicle vehicle = new Vehicle(iVehicleId, iVehicleYear, sVehicleMake, sVehicleModel);
-                                oVehicleReference.child("Make").setValue(vehicle.getMake());
-                                oVehicleReference.child("Model").setValue(vehicle.getModel());
-                                oVehicleReference.child("Year").setValue(vehicle.getYear());
-                                dialog.cancel();
                             }
-                        }).show();
+                        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // extract and convert data from the edit text fields
+                sVehicleModel = editTextVehicleModelEdit.getText().toString().trim();
+                sVehicleMake = editTextVehicleMakeEdit.getText().toString().trim();
+                sVehicleYear = editTextVehicleYearEdit.getText().toString().trim();
+                iVehicleId = Integer.parseInt(sVehicleId);
+
+                if (sVehicleYear.length() == 0 || sVehicleYear == null){
+                    editTextVehicleModelEdit.setError("Text Can't be empty");
+                }
+                if (sVehicleModel.length() == 0 || sVehicleModel == null){
+                    editTextVehicleModelEdit.setError("Text Can't be empty");
+                }
+                if (sVehicleMake.length() == 0 || sVehicleMake == null) {
+                    editTextVehicleMakeEdit.setError("Text Can't be empty");
+                }
+                else if(sVehicleId.length() != 0 && sVehicleMake.length() != 0
+                        && sVehicleModel.length() != 0 && sVehicleYear.length() != 0) {
+                    iVehicleYear = Integer.parseInt(sVehicleYear);
+                    Vehicle vehicle = new Vehicle(iVehicleId, iVehicleYear, sVehicleMake, sVehicleModel);
+                    oVehicleReference.child("Make").setValue(vehicle.getMake());
+                    oVehicleReference.child("Model").setValue(vehicle.getModel());
+                    oVehicleReference.child("Year").setValue(vehicle.getYear());
+                    Toast.makeText(context, "Vehicle Information Updated",Toast.LENGTH_LONG).show();
+                    dialog.cancel();
+                }
+            }
+        });
     }
 }
