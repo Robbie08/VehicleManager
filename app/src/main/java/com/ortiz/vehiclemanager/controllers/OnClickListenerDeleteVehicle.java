@@ -30,8 +30,6 @@ public class OnClickListenerDeleteVehicle implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         Context context = view.getRootView().getContext();
-
-        // we have to inflate the alert dialog
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View formElementsView = inflater.inflate(R.layout.vehicle_delete_by_id_form, null, false);
 

@@ -24,16 +24,10 @@ import com.ortiz.vehiclemanager.models.Vehicle;
  * First display a form for the user to fill out. This form will prompt
  * the user for the Make, Model, Year, and Id of the Vehicle.
  */
-
-
 public class OnClickListenerAddVehicle implements View.OnClickListener {
     @Override
     public void onClick(View view) {
-
-
         Context context = view.getRootView().getContext();
-
-        // make our layouts accessible to our codebase
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View formElementsView = inflater.inflate(R.layout.vehicle_entry_form,null,false);
 
