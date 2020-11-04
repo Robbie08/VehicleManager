@@ -12,11 +12,17 @@ public class FirebaseDatabaseManager {
         sVehicleId = Integer.toString(vehicle.getId());
     }
 
+    public FirebaseDatabaseManager() {
+    }
 
 
     public void editVehicle() {
         oVehicleReference.child(sVehicleId).child("Make").setValue(vehicle.getMake());
         oVehicleReference.child(sVehicleId).child("Model").setValue(vehicle.getModel());
         oVehicleReference.child(sVehicleId).child("Year").setValue(vehicle.getYear());
+    }
+
+    public void deleteVehicleById(String sVehicleId) {
+        oVehicleReference.child(sVehicleId).removeValue();
     }
 }

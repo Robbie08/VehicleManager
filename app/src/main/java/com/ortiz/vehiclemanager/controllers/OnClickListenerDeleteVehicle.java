@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ortiz.vehiclemanager.R;
+import com.ortiz.vehiclemanager.models.FirebaseDatabaseManager;
 
 /**
  * OnClickListenerDeleteVehicle instance
@@ -46,13 +47,14 @@ public class OnClickListenerDeleteVehicle implements View.OnClickListener {
         AlertDialog dialog = builder.create();
         dialog.show();
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
-            // create a reference to the DB where our vehicles are stored
-            DatabaseReference oVehicleReference = FirebaseDatabase.getInstance().getReference().child("Vehicles");
             String sVehicleId = editTextVehicleId.getText().toString().trim();
 
             // This will handle the input validation, to make sure the user will not give any null or empty values
             if(sVehicleId.length() != 0 && !sVehicleId.isEmpty() && sVehicleId != null ){
-                oVehicleReference.child(sVehicleId).removeValue();
+
+                FirebaseDatabaseManager firebaseDatabaseManager = new FirebaseDatabaseManager();
+                firebaseDatabaseManager.deleteVehicleById(sVehicleId);
+
                 dialog.cancel();
                 Toast.makeText(context, "Vehicle Deleted Successfully",Toast.LENGTH_LONG).show();
             }
