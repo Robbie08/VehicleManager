@@ -14,6 +14,14 @@ import com.ortiz.vehiclemanager.controllers.OnClickListenerDeleteVehicle;
 import com.ortiz.vehiclemanager.controllers.OnClickListenerEditVehicle;
 
 
+/**
+ * This MainActivity is where the View sits. This class's main purpose
+ * is to contain our views and listen if they are clicked or not. If they
+ * are clicked then they will get handled by another class.
+ *
+ * 10/31/2020
+ * Robert Ortiz
+ */
 public class MainActivity extends AppCompatActivity {
 
     private DatabaseReference firebaseDatabase;
@@ -27,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance().getReference();
         oVehicleList = findViewById(R.id.vehicle_list);
 
-        // create button on click
+        // Define the buttons and instantiate another class to control the button click
         Button buttonAddVehicle = (Button) findViewById(R.id.buttonAddVehicle);
         buttonAddVehicle.setOnClickListener(new OnClickListenerAddVehicle());
 

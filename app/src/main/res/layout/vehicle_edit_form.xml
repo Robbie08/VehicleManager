@@ -1,10 +1,12 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
+
 
     <EditText
-        android:id="@+id/editTextVehicleMake"
+        android:id="@+id/editTextVehicleEditMake"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -19,33 +21,33 @@
     </EditText>
 
     <EditText
-        android:id="@+id/editTextVehicleModel"
+        android:id="@+id/editTextVehicleEditModel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editTextVehicleMake"
+        android:layout_below="@+id/editTextVehicleEditMake"
         android:hint="Enter Vehicle Model"
         android:singleLine="true"
         android:paddingStart="5dp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"/>
     <EditText
-        android:id="@+id/editTextVehicleYear"
+        android:id="@+id/editTextVehicleEditYear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editTextVehicleModel"
+        android:layout_below="@+id/editTextVehicleEditModel"
         android:hint="Enter Vehicle Year"
         android:singleLine="true"
         android:paddingStart="5dp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"/>
     <EditText
-        android:id="@+id/editTextVehicleId"
+        android:id="@+id/editTextVehicleEditId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editTextVehicleYear"
+        android:layout_below="@+id/editTextVehicleEditYear"
         android:hint="Enter Vehicle Id"
         android:singleLine="true"
         android:paddingStart="5dp"
