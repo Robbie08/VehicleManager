@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 
 import com.ortiz.vehiclemanager.R;
 
@@ -26,6 +27,8 @@ public class OnClickListenerEditVehicle implements View.OnClickListener {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View formElementView = inflater.inflate(R.layout.vehicle_edit_by_id_form,null,false);
 
+        EditText editTextVehicleId = (EditText) formElementView.getRootView().findViewById(R.id.editTextVehicleEditById);
+
         new AlertDialog.Builder(context)
                 .setView(formElementView)
                 .setTitle("Edit Vehicle by Id")
@@ -34,7 +37,8 @@ public class OnClickListenerEditVehicle implements View.OnClickListener {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // Call another alert dialog where the user can update the vehicle information
-                                new OnClickListenerEditVehicleForm(formElementView.getRootView().findViewById(R.id.editTextVehicleEditById));
+                                String sVehicleId = editTextVehicleId.getText().toString().trim();
+                                new OnClickListenerEditVehicleForm(formElementView, sVehicleId);
                                 dialog.cancel();
                             }
                         }).show();
