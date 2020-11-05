@@ -47,13 +47,15 @@ public class MainActivity extends AppCompatActivity {
         Button buttonDeleteVehicle = (Button) findViewById(R.id.buttonDeleteVehicle);
         buttonDeleteVehicle.setOnClickListener(new OnClickListenerDeleteVehicle());
 
+        Button buttonGetVehicle = (Button) findViewById(R.id.buttonGetVehicle);
+        buttonGetVehicle.setOnClickListener(new OnClickListenerGetVehicle());
+
         // The following code will call our Firebase manager and retrieve the data from Firebase
         ArrayList<String> oVehicleList = new ArrayList<>();
         ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.simple_list_item, oVehicleList);
         FirebaseDatabaseManager firebaseDatabaseManager = new FirebaseDatabaseManager();
         firebaseDatabaseManager.getDatabaseItems(oVehicleList, adapter);
         oVehicleListView.setAdapter(adapter); // add the values to our list
-
 
     }
 }

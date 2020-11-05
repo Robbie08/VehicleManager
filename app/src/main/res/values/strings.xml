@@ -3,6 +3,7 @@
     <string name="add_vehicle">Add Vehicle</string>
     <string name="edit_vehicle">Edit Vehicle</string>
     <string name="delete_vehicle">Delete Vehicle</string>
+    <string name="get_vehicle">Get Vehicle</string>
     <string name="vehicleMake">Vehicle Make</string>
     <string name="vehicleModel">Vehicle Model</string>
     <string name="vehicleYear">Vehicle Year</string>

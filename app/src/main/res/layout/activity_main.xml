@@ -40,12 +40,25 @@
         android:layout_marginTop="140dp"
         android:text="@string/delete_vehicle" />
 
+    <Button
+        android:id="@+id/buttonGetVehicle"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonDeleteVehicle"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="53dp"
+        android:text="@string/get_vehicle" />
+
     <ListView
         android:id="@+id/vehicle_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/buttonDeleteVehicle"
-        android:layout_marginTop="46dp" />
+        android:layout_below="@+id/buttonGetVehicle"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"/>
 
 
 </RelativeLayout>
