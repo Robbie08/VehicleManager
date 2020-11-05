@@ -77,13 +77,22 @@ public class OnClickListenerAddVehicle implements View.OnClickListener {
                 // we need to covert year and id to int so that we can create our Vehicle object
                 iVehicleYear = Integer.parseInt(sVehicleYear);
                 iVehicleId = Integer.parseInt(sVehicleId);
-                Vehicle vehicle = new Vehicle(iVehicleId,iVehicleYear,sVehicleMake,sVehicleModel);
 
-                FirebaseDatabaseManager firebaseDatabaseManager = new FirebaseDatabaseManager(vehicle);
-                firebaseDatabaseManager.addVehicle();
+                if(iVehicleYear > 2050){
+                    editTextVehicleYear.setError("Vehicle Year can't be greater than 2050");
+                }
+                if(iVehicleYear < 1950){
+                    editTextVehicleYear.setError("Vehicle Year can't be less than 1950");
+                }
+                else if(iVehicleYear >= 1950 && iVehicleYear <= 2050){
+                    Vehicle vehicle = new Vehicle(iVehicleId,iVehicleYear,sVehicleMake,sVehicleModel);
 
-                dialog.cancel();
-                Toast.makeText(context, "Vehicle Added Successfully",Toast.LENGTH_LONG).show();
+                    FirebaseDatabaseManager firebaseDatabaseManager = new FirebaseDatabaseManager(vehicle);
+                    firebaseDatabaseManager.addVehicle();
+
+                    dialog.cancel();
+                    Toast.makeText(context, "Vehicle Added Successfully",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

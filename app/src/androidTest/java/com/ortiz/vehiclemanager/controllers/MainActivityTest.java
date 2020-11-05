@@ -13,6 +13,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -57,6 +58,23 @@ public class MainActivityTest {
         Espresso.onView(withId(R.id.editTextVehicleId)).perform(typeText(dummyId));
         Espresso.onView(withText("ADD")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
 
+    }
+
+    /**
+     * This function tests the Add Vehicle form. The test case should 1) not crash when the year input
+     * is <1950 and >2050. (2) The correct deterrent should prompt the user that the year is not valid.
+     */
+    @Test
+    public void test1_1testAddFormEnterNotValidYear(){
+        Espresso.onView(withId(R.id.buttonAddVehicle)).perform(click());
+        Espresso.onView(withId(R.id.editTextVehicleMake)).perform(typeText(dummyMake));
+        Espresso.onView(withId(R.id.editTextVehicleModel)).perform(typeText(dummyModel));
+        Espresso.onView(withId(R.id.editTextVehicleYear)).perform(typeText("1949"));
+        Espresso.onView(withId(R.id.editTextVehicleId)).perform(typeText(dummyId));
+        Espresso.onView(withText("ADD")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+        Espresso.onView(withId(R.id.editTextVehicleId)).perform(clearText());
+        Espresso.onView(withId(R.id.editTextVehicleId)).perform(typeText("2051"));
+        Espresso.onView(withText("ADD")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
     }
 
     /**
@@ -114,6 +132,9 @@ public class MainActivityTest {
     }
 
 
+    /**
+     * This will test if the user was able to send a vehicle to the database
+     */
     @Test
     public void test4_testAddVehicleToDatabase(){
         Espresso.onView(withId(R.id.buttonAddVehicle)).perform(click());
@@ -125,6 +146,9 @@ public class MainActivityTest {
         Espresso.onView(withText("ADD")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
     }
 
+    /**
+     * This will test if the user was able to edit Vehicle from the database
+     */
     @Test
     public void test6_testEditVehicleInDatabase(){
         Espresso.onView(withId(R.id.buttonEditVehicle)).perform(click());
@@ -137,6 +161,9 @@ public class MainActivityTest {
         Espresso.onView(withText("SAVE")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
     }
 
+    /**
+     * This will test if the user was able to delete Vehicle from the database
+     */
     @Test
     public void test7_testDeleteVehicleByIdInDatabase(){
         // click on Delete Vehicle button
