@@ -24,9 +24,9 @@ import java.util.ArrayList;
  * 10/31/2020
  * Robert Ortiz
  */
-public class MainActivity extends AppCompatActivity {
 
-    private DatabaseReference firebaseDatabase;
+
+public class MainActivity extends AppCompatActivity {
     private ListView oVehicleListView;
 
     @Override
@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        firebaseDatabase = FirebaseDatabase.getInstance().getReference();
         oVehicleListView = findViewById(R.id.vehicle_list);
 
         // Define the buttons and instantiate another class to control the button click
