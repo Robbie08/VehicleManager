@@ -1,17 +1,19 @@
 package com.ortiz.vehiclemanager.controllers;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.ortiz.vehiclemanager.controllers.OnClickListenerAddVehicle;
 import com.ortiz.vehiclemanager.R;
-import com.ortiz.vehiclemanager.controllers.OnClickListenerDeleteVehicle;
-import com.ortiz.vehiclemanager.controllers.OnClickListenerEditVehicle;
+import com.ortiz.vehiclemanager.models.FirebaseDatabaseManager;
+
+
+import java.util.ArrayList;
 
 
 /**
@@ -25,7 +27,7 @@ import com.ortiz.vehiclemanager.controllers.OnClickListenerEditVehicle;
 public class MainActivity extends AppCompatActivity {
 
     private DatabaseReference firebaseDatabase;
-    private RecyclerView oVehicleList;
+    private ListView oVehicleListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         firebaseDatabase = FirebaseDatabase.getInstance().getReference();
-        oVehicleList = findViewById(R.id.vehicle_list);
+        oVehicleListView = findViewById(R.id.vehicle_list);
 
         // Define the buttons and instantiate another class to control the button click
         Button buttonAddVehicle = (Button) findViewById(R.id.buttonAddVehicle);
@@ -44,6 +46,14 @@ public class MainActivity extends AppCompatActivity {
 
         Button buttonDeleteVehicle = (Button) findViewById(R.id.buttonDeleteVehicle);
         buttonDeleteVehicle.setOnClickListener(new OnClickListenerDeleteVehicle());
+
+        // The following code will call our Firebase manager and retrieve the data from Firebase
+        ArrayList<String> oVehicleList = new ArrayList<>();
+        ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.simple_list_item, oVehicleList);
+        FirebaseDatabaseManager firebaseDatabaseManager = new FirebaseDatabaseManager();
+        firebaseDatabaseManager.getDatabaseItems(oVehicleList, adapter);
+        oVehicleListView.setAdapter(adapter); // add the values to our list
+
 
     }
 }

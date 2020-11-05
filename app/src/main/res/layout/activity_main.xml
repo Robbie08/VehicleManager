@@ -40,7 +40,7 @@
         android:layout_marginTop="140dp"
         android:text="@string/delete_vehicle" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ListView
         android:id="@+id/vehicle_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
