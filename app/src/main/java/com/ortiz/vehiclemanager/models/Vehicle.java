@@ -7,10 +7,10 @@ package com.ortiz.vehiclemanager.models;
  * This class contains our basic definition of a Vehicle Object
  */
 public class Vehicle {
-    public int Id;
-    public int Year;
-    public String Make;
-    public String Model;
+    private int Id;
+    private int Year;
+    private String Make;
+    private String Model;
     public Vehicle(){}
     public Vehicle(int id, int year, String make, String model){
         this.Id = id;
@@ -52,3 +52,5 @@ public class Vehicle {
     }
 
 }
+
+

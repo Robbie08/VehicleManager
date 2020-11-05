@@ -2,11 +2,17 @@ package com.ortiz.vehiclemanager.controllers;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.ortiz.vehiclemanager.R;
+import com.ortiz.vehiclemanager.models.FirebaseDatabaseManager;
+import com.ortiz.vehiclemanager.models.Vehicle;
+
+import java.util.ArrayList;
 
 public class OnClickListenerGetVehicle implements View.OnClickListener {
     @Override
@@ -32,6 +38,8 @@ public class OnClickListenerGetVehicle implements View.OnClickListener {
             // This will handle the input validation, to make sure the user will not give any null or empty values
             if (sVehicleId.length() != 0 && !sVehicleId.isEmpty() && sVehicleId != null) {
                 //implement logic to get the vehicle information and display it in a new alert dialog
+                FirebaseDatabaseManager firebaseDatabaseManager = new FirebaseDatabaseManager();
+                firebaseDatabaseManager.getVehicleById(sVehicleId, formElementView);
                 dialog.cancel();
             } else {
                 editTextVehicleId.setError("Text Can't be empty");
