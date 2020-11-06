@@ -39,7 +39,7 @@ public class OnClickListenerGetVehicleDisplay{
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(formElementView);
-        builder.setTitle("Vehicle Data: " +sVehicleId);
+        builder.setTitle("Vehicle: " +sVehicleId);
         builder.setPositiveButton("Close",
                 (dialog, which) -> {
                     // learned that some older versions of android studio need this empty onClick event to not crash
