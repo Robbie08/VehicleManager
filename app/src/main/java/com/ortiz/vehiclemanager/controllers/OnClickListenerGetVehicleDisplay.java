@@ -9,6 +9,14 @@ import android.widget.TextView;
 import com.ortiz.vehiclemanager.R;
 import com.ortiz.vehiclemanager.models.Vehicle;
 
+/**
+ * This instance handles data passed in by the database and then it will display it on a
+ * Alert Dialog.
+ *
+ * Robert Ortiz
+ * 11/3/2020
+ */
+
 public class OnClickListenerGetVehicleDisplay{
     Vehicle vehicle;
     String sVehicleId;
