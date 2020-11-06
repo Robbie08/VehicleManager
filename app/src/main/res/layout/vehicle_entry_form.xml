@@ -35,6 +35,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/editTextVehicleModel"
         android:hint="Enter Vehicle Year"
+        android:inputType="number"
         android:singleLine="true"
         android:paddingStart="5dp"
         android:layout_marginStart="5dp"

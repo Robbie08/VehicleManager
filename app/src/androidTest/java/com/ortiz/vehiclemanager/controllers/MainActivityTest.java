@@ -5,6 +5,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
 import com.ortiz.vehiclemanager.R;
+import com.ortiz.vehiclemanager.interfaces.FirebaseManager;
+import com.ortiz.vehiclemanager.models.FirebaseDatabaseManager;
 
 import org.junit.After;
 import org.junit.Before;
