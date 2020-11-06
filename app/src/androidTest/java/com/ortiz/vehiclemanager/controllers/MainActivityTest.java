@@ -21,14 +21,21 @@ import static androidx.test.espresso.matcher.RootMatchers.isDialog;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.junit.Assert.*;
+
+
+/**
+ * This is the test class for our Main Activity. In the main activity we must test, the Add, Edit,
+ * Delete, and Get buttons. We should also test for interactions with the AlertDialog forms, to ensure
+ * that the application does not crash, the user doesn't type in any out of bounds/null values, and that
+ * the application sends us to the correct location.
+ */
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MainActivityTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
     private MainActivity mainActivity = null;
-    private String dummyMake = "Toyota", dummyModel = "4Runner-Test", dummyYear = "2001", dummyId = "717171";
+    private String dummyMake = "Toyota", dummyModel = "4Runner-Test", dummyYear = "2001", dummyId = "1010";
 
 
     /**
@@ -54,8 +61,7 @@ public class MainActivityTest {
 
         Espresso.onView(withId(R.id.editTextVehicleMake)).perform(typeText(dummyMake));
         Espresso.onView(withId(R.id.editTextVehicleModel)).perform(typeText(dummyModel));
-        Espresso.onView(withId(R.id.editTextVehicleYear)).perform(typeText(dummyYear));
-        Espresso.onView(withId(R.id.editTextVehicleId)).perform(typeText(dummyId));
+        Espresso.onView(withId(R.id.editTextVehicleYear)).perform(typeText(""));
         Espresso.onView(withText("ADD")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
 
     }
@@ -70,10 +76,10 @@ public class MainActivityTest {
         Espresso.onView(withId(R.id.editTextVehicleMake)).perform(typeText(dummyMake));
         Espresso.onView(withId(R.id.editTextVehicleModel)).perform(typeText(dummyModel));
         Espresso.onView(withId(R.id.editTextVehicleYear)).perform(typeText("1949"));
-        Espresso.onView(withId(R.id.editTextVehicleId)).perform(typeText(dummyId));
+
         Espresso.onView(withText("ADD")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
-        Espresso.onView(withId(R.id.editTextVehicleId)).perform(clearText());
-        Espresso.onView(withId(R.id.editTextVehicleId)).perform(typeText("2051"));
+        Espresso.onView(withId(R.id.editTextVehicleYear)).perform(clearText());
+        Espresso.onView(withId(R.id.editTextVehicleYear)).perform(typeText("2051"));
         Espresso.onView(withText("ADD")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
     }
 
@@ -121,7 +127,7 @@ public class MainActivityTest {
      * the user has typed in some id into the edit text box.
      */
     @Test
-    public void test5_testGetVehicleByIdFormIfLeftEmpty(){
+    public void test5_1testGetVehicleByIdFormIfLeftEmpty(){
         Espresso.onView(withId(R.id.buttonGetVehicle)).perform(click());
 
         Espresso.onView(withId(R.id.editTextVehicleGetById)).perform(typeText(""));
@@ -131,6 +137,17 @@ public class MainActivityTest {
         Espresso.onView(withText("GET")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
     }
 
+    @Test
+    public void test5_testGetVehicleDisplayValidation(){
+        Espresso.onView(withId(R.id.buttonGetVehicle)).perform(click());
+
+        Espresso.onView(withId(R.id.editTextVehicleGetById)).perform(typeText(dummyId));
+        Espresso.onView(withText("GET")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+        Espresso.onView(withId(R.id.textViewVehicleShowMake)).check(matches(withText(dummyMake)));
+        Espresso.onView(withId(R.id.textViewVehicleShowModel)).check(matches(withText(dummyModel)));
+        Espresso.onView(withId(R.id.textViewVehicleShowYear)).check(matches(withText(dummyYear)));
+        Espresso.onView(withId(R.id.textViewVehicleShowId)).check(matches(withText(dummyId)));
+    }
 
     /**
      * This will test if the user was able to send a vehicle to the database
@@ -142,7 +159,6 @@ public class MainActivityTest {
         Espresso.onView(withId(R.id.editTextVehicleMake)).perform(typeText(dummyMake));
         Espresso.onView(withId(R.id.editTextVehicleModel)).perform(typeText(dummyModel));
         Espresso.onView(withId(R.id.editTextVehicleYear)).perform(typeText(dummyYear));
-        Espresso.onView(withId(R.id.editTextVehicleId)).perform(typeText(dummyId));
         Espresso.onView(withText("ADD")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
     }
 
@@ -150,7 +166,7 @@ public class MainActivityTest {
      * This will test if the user was able to edit Vehicle from the database
      */
     @Test
-    public void test6_testEditVehicleInDatabase(){
+    public void test6testEditVehicleInDatabase(){
         Espresso.onView(withId(R.id.buttonEditVehicle)).perform(click());
         Espresso.onView(withId(R.id.editTextVehicleEditById)).perform(typeText(dummyId));
         Espresso.onView(withText("EDIT")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
@@ -160,6 +176,7 @@ public class MainActivityTest {
         Espresso.onView(withId(R.id.editTextVehicleEditYear)).perform(typeText(dummyYear));
         Espresso.onView(withText("SAVE")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
     }
+
 
     /**
      * This will test if the user was able to delete Vehicle from the database

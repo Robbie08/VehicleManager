@@ -13,6 +13,8 @@ import com.ortiz.vehiclemanager.R;
 import com.ortiz.vehiclemanager.models.FirebaseDatabaseManager;
 import com.ortiz.vehiclemanager.models.Vehicle;
 
+import java.util.UUID;
+
 
 /**
  * OnClickListenerAddVehicle instance
@@ -35,7 +37,6 @@ public class OnClickListenerAddVehicle implements View.OnClickListener {
         final EditText editTextVehicleMake = (EditText) formElementsView.findViewById(R.id.editTextVehicleMake);
         final EditText editTextVehicleModel = (EditText) formElementsView.findViewById(R.id.editTextVehicleModel);
         final EditText editTextVehicleYear = (EditText) formElementsView.findViewById(R.id.editTextVehicleYear);
-        final EditText editTextVehicleId = (EditText) formElementsView.findViewById(R.id.editTextVehicleId);
 
 
         // Display a alert dialog box to the user, this will display the entry form to add the vehicle
@@ -57,12 +58,7 @@ public class OnClickListenerAddVehicle implements View.OnClickListener {
             sVehicleMake = editTextVehicleMake.getText().toString().trim();
             sVehicleModel = editTextVehicleModel.getText().toString().trim();
             sVehicleYear = editTextVehicleYear.getText().toString().trim();
-            sVehicleId = editTextVehicleId.getText().toString().trim();
 
-            // handle empty input validation before we send any data to the Database
-            if(sVehicleId.length() == 0 || sVehicleId == null){
-                editTextVehicleId.setError("Text can't be empty");
-            }
             if(sVehicleYear.length() == 0 || sVehicleYear == null){
                 editTextVehicleYear.setError("Text can't be empty");
             }
@@ -72,12 +68,11 @@ public class OnClickListenerAddVehicle implements View.OnClickListener {
             if(sVehicleMake.length() == 0 || sVehicleMake == null){
                 editTextVehicleMake.setError("Text can't be empty");
             }
-            else if(sVehicleId.length() != 0 && sVehicleMake.length() != 0
-                    && sVehicleModel.length() != 0 && sVehicleYear.length() != 0){
-                // we need to covert year and id to int so that we can create our Vehicle object
-                iVehicleYear = Integer.parseInt(sVehicleYear);
-                iVehicleId = Integer.parseInt(sVehicleId);
+            else if( sVehicleMake.length() != 0 && sVehicleModel.length() != 0 && sVehicleYear.length() != 0){
 
+                iVehicleYear = Integer.parseInt(sVehicleYear);
+                iVehicleId = (int) (System.currentTimeMillis()/1000);
+                iVehicleId -= 100000000;
                 if(iVehicleYear > 2050){
                     editTextVehicleYear.setError("Vehicle Year can't be greater than 2050");
                 }
@@ -96,4 +91,5 @@ public class OnClickListenerAddVehicle implements View.OnClickListener {
             }
         });
     }
+
 }

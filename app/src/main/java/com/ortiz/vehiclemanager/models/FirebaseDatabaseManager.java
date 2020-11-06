@@ -12,6 +12,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.ortiz.vehiclemanager.controllers.OnClickListenerAddVehicle;
+import com.ortiz.vehiclemanager.controllers.OnClickListenerGetVehicle;
 import com.ortiz.vehiclemanager.controllers.OnClickListenerGetVehicleDisplay;
 
 
@@ -25,10 +27,12 @@ import java.util.ArrayList;
  * Robert Ortiz
  * 11/4/2020
  */
+
 public class FirebaseDatabaseManager {
     Vehicle vehicle;
     DatabaseReference oVehicleReference = FirebaseDatabase.getInstance().getReference().child("Vehicles");
     String sVehicleId;
+    int maxId = 0;
     public FirebaseDatabaseManager(Vehicle vehicle) {
         this.vehicle = vehicle;
         sVehicleId = Integer.toString(vehicle.getId());
@@ -48,11 +52,13 @@ public class FirebaseDatabaseManager {
     }
 
     public void addVehicle() {
-        oVehicleReference.child(sVehicleId).child("Make").setValue(vehicle.getMake());
-        oVehicleReference.child(sVehicleId).child("Model").setValue(vehicle.getModel());
-        oVehicleReference.child(sVehicleId).child("Year").setValue(vehicle.getYear());
-        oVehicleReference.child(sVehicleId).child("Id").setValue(vehicle.getId());
+
+        oVehicleReference.child(Integer.toString(vehicle.getId())).child("Make").setValue(vehicle.getMake());
+        oVehicleReference.child(Integer.toString(vehicle.getId())).child("Model").setValue(vehicle.getModel());
+        oVehicleReference.child(Integer.toString(vehicle.getId())).child("Year").setValue(vehicle.getYear());
+        oVehicleReference.child(Integer.toString(vehicle.getId())).child("Id").setValue(Integer.toString(vehicle.getId()));
     }
+
 
     public void getDatabaseItems(ArrayList<String> oVehicleList, ArrayAdapter adapter) {
         oVehicleReference.addValueEventListener(new ValueEventListener() {
