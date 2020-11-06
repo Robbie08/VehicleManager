@@ -2,14 +2,12 @@ package com.ortiz.vehiclemanager.controllers;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
 import com.ortiz.vehiclemanager.R;
 
 /**

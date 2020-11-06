@@ -2,14 +2,12 @@ package com.ortiz.vehiclemanager.controllers;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.ortiz.vehiclemanager.R;
 import com.ortiz.vehiclemanager.interfaces.FirebaseManager;
 import com.ortiz.vehiclemanager.models.FirebaseDatabaseManager;
@@ -65,13 +63,13 @@ public class OnClickListenerEditVehicleForm implements View.OnClickListener {
             sVehicleYear = editTextVehicleYearEdit.getText().toString().trim();
             iVehicleId = Integer.parseInt(sVehicleId);
 
-            if (sVehicleYear.length() == 0 || sVehicleYear == null){
+            if (sVehicleYear.length() == 0){
                 editTextVehicleModelEdit.setError("Text Can't be empty");
             }
-            if (sVehicleModel.length() == 0 || sVehicleModel == null){
+            if (sVehicleModel.length() == 0){
                 editTextVehicleModelEdit.setError("Text Can't be empty");
             }
-            if (sVehicleMake.length() == 0 || sVehicleMake == null) {
+            if (sVehicleMake.length() == 0) {
                 editTextVehicleMakeEdit.setError("Text Can't be empty");
             }
             else if(sVehicleId.length() != 0 && sVehicleMake.length() != 0

@@ -139,17 +139,6 @@ public class MainActivityTest {
         Espresso.onView(withText("GET")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
     }
 
-    @Test
-    public void test5_testGetVehicleDisplayValidation(){
-        Espresso.onView(withId(R.id.buttonGetVehicle)).perform(click());
-
-        Espresso.onView(withId(R.id.editTextVehicleGetById)).perform(typeText(dummyId));
-        Espresso.onView(withText("GET")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
-        Espresso.onView(withId(R.id.textViewVehicleShowMake)).check(matches(withText(dummyMake)));
-        Espresso.onView(withId(R.id.textViewVehicleShowModel)).check(matches(withText(dummyModel)));
-        Espresso.onView(withId(R.id.textViewVehicleShowYear)).check(matches(withText(dummyYear)));
-        Espresso.onView(withId(R.id.textViewVehicleShowId)).check(matches(withText(dummyId)));
-    }
 
     /**
      * This will test if the user was able to send a vehicle to the database

@@ -22,9 +22,9 @@ import com.ortiz.vehiclemanager.interfaces.FirebaseManager;
 import java.util.ArrayList;
 
 /**
- * This class was created to handle any transactions between the Firebase Database and
- * the application. This will allow our Database logic to not be implemented in the
- * controller classes.
+ * This class utilizes Firebase REST API services was created to handle any transactions
+ * between the Firebase Database and the application. This will allow our Database logic
+ * to not be implemented in the controller classes.
  *
  * Robert Ortiz
  * 11/4/2020

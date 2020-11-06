@@ -1,14 +1,13 @@
 package com.ortiz.vehiclemanager.controllers;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
 import com.ortiz.vehiclemanager.R;
 import com.ortiz.vehiclemanager.interfaces.FirebaseManager;
 import com.ortiz.vehiclemanager.interfaces.Utils;
@@ -54,7 +53,7 @@ public class OnClickListenerAddVehicle implements View.OnClickListener {
         android.app.AlertDialog dialog = builder.create();
         dialog.show();
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
-            String sVehicleMake, sVehicleModel, sVehicleYear, sVehicleId;
+            String sVehicleMake, sVehicleModel, sVehicleYear;
             int iVehicleYear, iVehicleId;
 
             // Once the user has typed in their information we must collect it
@@ -62,13 +61,13 @@ public class OnClickListenerAddVehicle implements View.OnClickListener {
             sVehicleModel = editTextVehicleModel.getText().toString().trim();
             sVehicleYear = editTextVehicleYear.getText().toString().trim();
 
-            if(sVehicleYear.length() == 0 || sVehicleYear == null){
+            if(sVehicleYear.length() == 0){
                 editTextVehicleYear.setError("Text can't be empty");
             }
-            if(sVehicleModel.length() == 0 || sVehicleModel == null){
+            if(sVehicleModel.length() == 0){
                 editTextVehicleModel.setError("Text can't be empty");
             }
-            if(sVehicleMake.length() == 0 || sVehicleMake == null){
+            if(sVehicleMake.length() == 0){
                 editTextVehicleMake.setError("Text can't be empty");
             }
             else if( sVehicleMake.length() != 0 && sVehicleModel.length() != 0 && sVehicleYear.length() != 0){

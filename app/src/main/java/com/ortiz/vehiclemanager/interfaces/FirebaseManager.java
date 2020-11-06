@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /**
  * simple interface class that demonstrates to the clients how to interact with
- * the database
+ * our implementation of Firebase REST API services
  *
  * Robert Ortiz
  * 11/5/2020

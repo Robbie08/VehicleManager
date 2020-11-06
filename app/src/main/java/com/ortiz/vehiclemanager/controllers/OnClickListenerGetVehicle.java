@@ -2,16 +2,16 @@ package com.ortiz.vehiclemanager.controllers;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
+
 
 import com.ortiz.vehiclemanager.R;
 import com.ortiz.vehiclemanager.interfaces.FirebaseManager;
 import com.ortiz.vehiclemanager.models.FirebaseDatabaseManager;
-import com.ortiz.vehiclemanager.models.Vehicle;
+
 
 import java.util.ArrayList;
 
@@ -41,7 +41,7 @@ public class OnClickListenerGetVehicle implements View.OnClickListener {
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
             String sVehicleId = editTextVehicleId.getText().toString().trim();
             // This will handle the input validation, to make sure the user will not give any null or empty values
-            if (sVehicleId.length() != 0 && !sVehicleId.isEmpty() && sVehicleId != null) {
+            if (sVehicleId.length() != 0) {
                 //implement logic to get the vehicle information and display it in a new alert dialog
                 FirebaseManager firebaseManager= new FirebaseDatabaseManager();
                 firebaseManager.getVehicleById(sVehicleId, formElementView);

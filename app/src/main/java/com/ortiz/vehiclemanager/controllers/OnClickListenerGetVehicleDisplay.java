@@ -5,7 +5,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ortiz.vehiclemanager.R;
 import com.ortiz.vehiclemanager.models.Vehicle;
