@@ -13,19 +13,21 @@ via the command line interface.
 * If the project does not run on Android studio please ensure that your machine is running a recent version of Android Studio; if 
 you need to download a new version, you can find one [here](https://developer.android.com/studio).
 
+### The Project
+Overall, it was a great experience because it was fun, and I learned new things throughout the process. My future plans are to modify the list by displaying the object in a card view where the elements are nice and structured. Feel free to download the application and interact with it. This application uses a real-time database, so you will always have the latest vehicles on your phone.
+
+<img src="https://github.com/Robbie08/VehicleManager/blob/main/VehicleManagerImages/home_page.PNG" width="270" height="570">
 
 ### Database Structure
 For this application I decided to use Firebase Database. I wanted to go with a NoSQL database for
 a couple of reasons.
-* Firebase allows us to take advantage of the cloud, which can be reliable.
+* Firebase REST API services allows us to take advantage of the cloud, which can be reliable in performance and security.
 * Since my data structure is not too complex, we could use a flatter database.
-* This project does not benefit too much from relational databases since there aren't that many things to keep track of. However, if this project were to require a little more complexity, we could also use another Firebase service which is Firebase store.
 * More importantly, it is very fast and it can scale if we need to add complexity in the future.
 
-I decided to make the vehicle's id the parent node of each vehicle object since we will need to get and delete by the vehicle's id.
-This has made the process simple when deleting, editing, and fetching from my database.
+I decided to make the vehicle's id the parent node of each vehicle object since we will need to interact with the vehicle ID continually. The vehicle ID is a unique-id so using this unique-id is the best way to identify the vehicles. Doing so has made the process simple when deleting, editing, and fetching from my database.
 
-![ProjectFirebaseDatabase](VehicleManagerImages/database_structure.PNG)
+![ProjectFirebaseDatabase](VehicleManagerImages/database_structure1.PNG)
 
 
 ### Project Structure
@@ -54,6 +56,11 @@ This consists of all the layouts for the application.
 * OnClickListenerEditVehicleForm
 * OnClickListenerGetVehicle
 * OnClickListenerGetVehicleDisplay
+
+#### Interfaces
+I included some interfaces to help our client interact with the REST API services
+* FirebaseManager
+* Utils
 
 ### Testing
 * I performed simple unit tests as well as instrumented tests to ensure app functionallity is working fine.
