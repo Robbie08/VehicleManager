@@ -26,3 +26,35 @@ I decided to make the vehicle's id the parent node of each vehicle object since 
 This has made the process simple when deleting, editing, and fetching from my database.
 
 ![ProjectFirebaseDatabase](VehicleManagerImages/database_structure.PNG)
+
+
+### Project Structure
+For this project I decided to use the MVC(Model View Controller) design patern.
+
+#### Model
+* Vehicle.java - The model class for what we define a vehicle to be.
+* FirebaseDatabaseManager.java - Model class for making transactions with the database.
+
+#### View
+This consists of all the layouts for the application.
+* activity_main.xml - the main container for the application that contains our buttons and list(client)
+* simple_list_item.xml
+* vehicle_display_data.xml
+* vehicle_delete_by_id_form.xml 
+* vehicle_edit_form.xml
+* vehicle_entry_form.xml
+* vehicle_edit_by_id_form.xml
+* vehicle_get_by_id.xml
+
+#### Controler
+* MainActivity.java - contains the controller code for handling view interactions as well as sending and recieving the appropriate data to the appropriate instances.
+* OnClickListenerAddVehicle
+* OnClickListenerDeleteVehicle
+* OnClickListenerEditVehicle
+* OnClickListenerEditVehicleForm
+* OnClickListenerGetVehicle
+* OnClickListenerGetVehicleDisplay
+
+### Testing
+* I performed simple unit tests as well as instrumented tests to ensure app functionallity is working fine.
+* Used Junit4 and Espresso for all tests.
