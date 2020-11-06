@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ortiz.vehiclemanager.R;
+import com.ortiz.vehiclemanager.interfaces.FirebaseManager;
 import com.ortiz.vehiclemanager.models.FirebaseDatabaseManager;
 import com.ortiz.vehiclemanager.models.Vehicle;
 
@@ -79,8 +80,8 @@ public class OnClickListenerEditVehicleForm implements View.OnClickListener {
                 Vehicle vehicle = new Vehicle(iVehicleId, iVehicleYear, sVehicleMake, sVehicleModel);
 
                 // Call the database manager
-                FirebaseDatabaseManager firebaseDatabaseManager = new FirebaseDatabaseManager(vehicle);
-                firebaseDatabaseManager.editVehicle();
+                FirebaseManager firebaseManager = new FirebaseDatabaseManager(vehicle);
+                firebaseManager.editVehicle();
 
                 Toast.makeText(context, "Vehicle Information Updated",Toast.LENGTH_LONG).show();
                 dialog.cancel();

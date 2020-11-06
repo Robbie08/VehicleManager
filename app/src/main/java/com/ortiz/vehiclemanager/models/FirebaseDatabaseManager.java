@@ -15,6 +15,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.ortiz.vehiclemanager.controllers.OnClickListenerAddVehicle;
 import com.ortiz.vehiclemanager.controllers.OnClickListenerGetVehicle;
 import com.ortiz.vehiclemanager.controllers.OnClickListenerGetVehicleDisplay;
+import com.ortiz.vehiclemanager.interfaces.FirebaseManager;
 
 
 import java.util.ArrayList;
@@ -28,11 +29,11 @@ import java.util.ArrayList;
  * 11/4/2020
  */
 
-public class FirebaseDatabaseManager {
+public class FirebaseDatabaseManager implements FirebaseManager {
     Vehicle vehicle;
     DatabaseReference oVehicleReference = FirebaseDatabase.getInstance().getReference().child("Vehicles");
     String sVehicleId;
-    int maxId = 0;
+
     public FirebaseDatabaseManager(Vehicle vehicle) {
         this.vehicle = vehicle;
         sVehicleId = Integer.toString(vehicle.getId());
@@ -41,18 +42,27 @@ public class FirebaseDatabaseManager {
     public FirebaseDatabaseManager() {
     }
 
+    /**
+     * This function will edit the given vehicle object in the firebase database
+     */
     public void editVehicle() {
         oVehicleReference.child(sVehicleId).child("Make").setValue(vehicle.getMake());
         oVehicleReference.child(sVehicleId).child("Model").setValue(vehicle.getModel());
         oVehicleReference.child(sVehicleId).child("Year").setValue(vehicle.getYear());
     }
 
+    /**
+     * This function will delete the vehicle form firebase database
+     * @param sVehicleId: the vehicle id of the vehicle we wish to delete
+     */
     public void deleteVehicleById(String sVehicleId) {
         oVehicleReference.child(sVehicleId).removeValue();
     }
 
+    /**
+     * This function will add a vehicle the the firebase database
+     */
     public void addVehicle() {
-
         oVehicleReference.child(Integer.toString(vehicle.getId())).child("Make").setValue(vehicle.getMake());
         oVehicleReference.child(Integer.toString(vehicle.getId())).child("Model").setValue(vehicle.getModel());
         oVehicleReference.child(Integer.toString(vehicle.getId())).child("Year").setValue(vehicle.getYear());
@@ -60,6 +70,13 @@ public class FirebaseDatabaseManager {
     }
 
 
+    /**
+     * This function will return the Vehicles from the database and update the array list of vehicle
+     * objects in JSON form parsed as strings.
+     *
+     * @param oVehicleList: An empty list that will contain our vehicles string format
+     * @param adapter: the adapter that helps our list update.
+     */
     public void getDatabaseItems(ArrayList<String> oVehicleList, ArrayAdapter adapter) {
         oVehicleReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -80,6 +97,12 @@ public class FirebaseDatabaseManager {
 
     }
 
+    /**
+     * This function will fetch the vehicle by passed in Id value.
+     *
+     * @param sVehicleId: a string type ID that this function will use to query the database
+     * @param view: the view that will get passed into the new instance
+     */
     public void getVehicleById(String sVehicleId, View view) {
         DatabaseReference oVehicleIdRef = oVehicleReference.child(sVehicleId);
         oVehicleIdRef.addValueEventListener(new ValueEventListener() {

@@ -10,7 +10,10 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ortiz.vehiclemanager.R;
+import com.ortiz.vehiclemanager.interfaces.FirebaseManager;
+import com.ortiz.vehiclemanager.interfaces.Utils;
 import com.ortiz.vehiclemanager.models.FirebaseDatabaseManager;
+import com.ortiz.vehiclemanager.models.MyUtils;
 import com.ortiz.vehiclemanager.models.Vehicle;
 
 import java.util.UUID;
@@ -71,8 +74,8 @@ public class OnClickListenerAddVehicle implements View.OnClickListener {
             else if( sVehicleMake.length() != 0 && sVehicleModel.length() != 0 && sVehicleYear.length() != 0){
 
                 iVehicleYear = Integer.parseInt(sVehicleYear);
-                iVehicleId = (int) (System.currentTimeMillis()/1000);
-                iVehicleId -= 100000000;
+                Utils myUtils = new MyUtils();
+                iVehicleId = myUtils.generateUniqueId();
                 if(iVehicleYear > 2050){
                     editTextVehicleYear.setError("Vehicle Year can't be greater than 2050");
                 }
@@ -82,8 +85,8 @@ public class OnClickListenerAddVehicle implements View.OnClickListener {
                 else if(iVehicleYear >= 1950 && iVehicleYear <= 2050){
                     Vehicle vehicle = new Vehicle(iVehicleId,iVehicleYear,sVehicleMake,sVehicleModel);
 
-                    FirebaseDatabaseManager firebaseDatabaseManager = new FirebaseDatabaseManager(vehicle);
-                    firebaseDatabaseManager.addVehicle();
+                    FirebaseManager firebaseManager = new FirebaseDatabaseManager(vehicle);
+                    firebaseManager.addVehicle();
 
                     dialog.cancel();
                     Toast.makeText(context, "Vehicle Added Successfully",Toast.LENGTH_LONG).show();

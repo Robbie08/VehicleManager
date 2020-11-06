@@ -9,11 +9,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ortiz.vehiclemanager.R;
+import com.ortiz.vehiclemanager.interfaces.FirebaseManager;
 import com.ortiz.vehiclemanager.models.FirebaseDatabaseManager;
 import com.ortiz.vehiclemanager.models.Vehicle;
 
 import java.util.ArrayList;
 
+/**
+ * This class will launch a Alert Dialog and prompt the user for the id of the vehicle they
+ * want to query. Once the information is extracted, it will then get sent to the database manager.
+ */
 public class OnClickListenerGetVehicle implements View.OnClickListener {
     @Override
     public void onClick(View view) {
@@ -38,8 +43,8 @@ public class OnClickListenerGetVehicle implements View.OnClickListener {
             // This will handle the input validation, to make sure the user will not give any null or empty values
             if (sVehicleId.length() != 0 && !sVehicleId.isEmpty() && sVehicleId != null) {
                 //implement logic to get the vehicle information and display it in a new alert dialog
-                FirebaseDatabaseManager firebaseDatabaseManager = new FirebaseDatabaseManager();
-                firebaseDatabaseManager.getVehicleById(sVehicleId, formElementView);
+                FirebaseManager firebaseManager= new FirebaseDatabaseManager();
+                firebaseManager.getVehicleById(sVehicleId, formElementView);
                 dialog.cancel();
             } else {
                 editTextVehicleId.setError("Text Can't be empty");
